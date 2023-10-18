@@ -1,12 +1,10 @@
 package test5;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,5 +38,12 @@ class CarTest {
     @Test
     void sumFalse(){
         assertNotEquals(car.sum(10), 15);
+    }
+    @ParameterizedTest
+    @DisplayName("My test`s name")
+    @CsvFileSource(resources = {"/test.csv"}, numLinesToSkip = 1, delimiterString = "}")
+    void tst(String input, String output){
+        car.setNumber(input);
+        assertEquals(output, car.getNumber());
     }
 }
